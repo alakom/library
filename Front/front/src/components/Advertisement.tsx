@@ -33,9 +33,9 @@ const Narrow = styled.div`
 export function Advertisement(){
     return (
         <Gallery>
-         <Wide style ={{background: '#F1EBE5'}}><img src="https://1.downloader.disk.yandex.ru/preview/dbdba02d7c10522fd5829fbbe10ac77f969ed28f4dd2249fcb4405abd8054985/inf/_9eH7_X8pOAOUHOq3EPBMw6I4Mj_W3WRcdlmm_q9cVOZ2vbKrTapUOnQnAlaqg-pH3b1kbAZW2Igrp4GtOD3gA%3D%3D?uid=808179730&filename=bAdv.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=808179730&tknv=v2&size=893x887" alt="some example image" style={{width: '100%',height: '100%',objectFit: 'scale-down'}} /></Wide>
-         <Narrow style ={{background: '#2E324F'}}><img src="https://1.downloader.disk.yandex.ru/preview/7d1d555f57dd041b7c534aa5bf26d5e7671e4a236468de6ccad00e96f655a035/inf/QAkcq0DptRs0M3CxLi_xBg6I4Mj_W3WRcdlmm_q9cVOCKosLrCdqcy2egUosx3SZD9Rtol9qJdNON7MxOanLoQ%3D%3D?uid=808179730&filename=sAdv1.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=808179730&tknv=v2&size=893x887" alt="some example image" style={{width: '100%',height: '100%',objectFit: 'contain'}} /></Narrow>
-         <Narrow style ={{background: '#C680C6'}}><img src="https://3.downloader.disk.yandex.ru/preview/61b10e123d3513825f57b0c693bf0680a188ac75d527133cc66191c957823d1a/inf/vvZ52O61WzgqhJTJU2lzvw6I4Mj_W3WRcdlmm_q9cVNX-TAqHo_haKo_XUrSQacJOcImROQglK65AeR7zx8t3g%3D%3D?uid=808179730&filename=sAdv2.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=808179730&tknv=v2&size=893x887" alt="some example image" style={{width: '100%',height: '100%',objectFit: 'contain'}} /></Narrow>  
+         <Wide style ={{background: '#F1EBE5'}}><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81rl4O9aFXHb3yh22sNpma-zNFnZM-fr0FWvv8yroCWdktQHE8bEOiXkMJEuCti9tFiToivxSRqZHfWAFvZ62Ijr1_DY8Q=w1860-h925" alt="Advertisement" style={{width: '100%',height: '100%',objectFit: 'scale-down'}} /></Wide>
+         <Narrow style ={{background: '#2E324F'}}><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81roeJw7VvcgDA6c8pF1eQirro9pP3j-qmzjAJwqOFTMEYPpNHan5vhVDsVufCZKxFaiMimoFhXFDkrDf0rpQeVr6aVuGw=w1860-h925" alt="Advertisement" style={{width: '100%',height: '100%',objectFit: 'contain'}} /></Narrow>
+         <Narrow style ={{background: '#C680C6'}}><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81o6in_rTKsLt0x9-Ya_j_-WI8_Ld7XSvhtZLDspzecVZ2yH11nk3eCAgius2NGzuYtxnhkYQ1tvLLLR1AOyN6S2CJVl=w1860-h925" alt="Advertisement" style={{width: '100%',height: '100%',objectFit: 'contain'}} /></Narrow>  
         </Gallery>
     );
 }
