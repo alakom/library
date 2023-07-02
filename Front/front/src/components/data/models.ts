@@ -14,3 +14,6 @@ export interface IBook{
         "count":number,
     }
 };
+export interface IGenre{
+    "title":string,
+};
