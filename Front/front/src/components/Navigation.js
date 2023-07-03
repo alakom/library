@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useLayoutEffect }  from 'react';
 import styled from "styled-components";
 import log from './data/icons/log_name.png';
 import { Button, Tooltip } from 'antd';
@@ -78,7 +78,7 @@ function clickMe() {
   };
 export function Navigation(){
     return (
-        
+        <>
         <Nav>
             <DLeft>
                 <Tooltip title="Search books">
@@ -109,5 +109,6 @@ export function Navigation(){
                     size="large"/>
                 </Tooltip></DRight>
         </Nav>
+        </>
     );
 }
