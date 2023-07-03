@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from "styled-components";
 import log from './data/icons/log_name.png';
 import { Button, Tooltip } from 'antd';
@@ -11,10 +10,11 @@ grid-gap: 45px;
  align-items: center;
  justify-content: center;
  flex-flow: row wrap;
-height: 40px;
+height: 45px;
 flex-shrink: 0;
 border-bottom: 3px solid #F1F1F2;
 background: #F8F8FA;
+margin-top:0px;
 `;
 const DRight = styled.div`
 display: grid;
@@ -46,36 +46,6 @@ pointer-events: none;
     -o-user-select: none;
     user-select: none;
 `;
-const ButtonSign = styled.button`
-justify-content: center;
-align-items: center;
-border: 0px;
-text-align: center;
-height: 28px;
-width: 40px;
-padding-top: 0px;
-padding-left: 0px;
-padding-right: 0px;
-icon: ./data/icons/sign_in.png;
-&:hover {
-    icon: ./data/icons/hover_sign.png;
-  }
-`;
-const Icon = styled.img`
-width: 41px;
-height: 28px;
-  -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-    &:hover {
-        icon = ./data/icons/hover_sign.png;
-      }
-`;
-function clickMe() {
-    alert("You clicked me!");
-  };
 export function Navigation(){
     return (
         

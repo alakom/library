@@ -6,7 +6,6 @@ import { genres } from './data/Genres';
 import { Button, Tooltip } from 'antd';
 import {SortAscendingOutlined,SortDescendingOutlined} from '@ant-design/icons';
 
-
 const GalleryBooks=styled.div`
     display: flex;
     grid-gap: 45px;
@@ -61,6 +60,7 @@ align-items: center;
  justify-content: flex-end;
 `;
 function filterBook(){
+return (
 <Filter>
       <Tooltip title="Ascending sort">
                     <Button
@@ -79,6 +79,7 @@ function filterBook(){
                     size="large"/>
                 </Tooltip>
       </Filter>
+  );
 }
 
 export function Catalog(){
@@ -96,6 +97,7 @@ export function Catalog(){
           </Tab>
         ))}
       </ButtonGroup>
+      <filterBook/>
       <GalleryBooks>
         {books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
         {books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
