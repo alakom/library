@@ -3,8 +3,11 @@ import styled from "styled-components";
 import {Book} from "./Book";
 import { books } from './data/Books';
 import { genres } from './data/Genres';
-import { Button, Tooltip } from 'antd';
-import {SortAscendingOutlined,SortDescendingOutlined} from '@ant-design/icons';
+import {Tooltip } from 'antd';
+import ASort from './data/icons/Ascending.png';
+import ASort_ from './data/icons/AscendingA.png';
+import DSort from './data/icons/Descending.png';
+import DSort_ from './data/icons/DescendingA.png';
 
 const GalleryBooks=styled.div`
     display: flex;
@@ -59,31 +62,47 @@ grid-template-columns: 50px 50px;
 align-items: center;
  justify-content: flex-end;
 `;
-function filterBook(){
-return (
-<Filter>
-      <Tooltip title="Ascending sort">
-                    <Button
-                    icon ={<SortAscendingOutlined />}
-                    shape="circle"
-                    type= "text"
-                    size="large"
-                    />
-                </Tooltip>
-            
-                <Tooltip title="Descending sort">
-                    <Button
-                    icon ={<SortDescendingOutlined />}
-                    shape="circle"
-                    type="text"
-                    size="large"/>
-                </Tooltip>
-      </Filter>
-  );
-}
+const SortA = styled.button`
+height: 20px;
+width: 20px;
+flex-shrink: 0;
+background: url(${ASort});
+background-size: cover;
+border: 0;
+margin: 10px;
+&:hover {
+    background: url(${ASort_});
+    background-size: cover;
+    border: 0;
+  }
+  &:disabled {
+    cursor: pointer;
+    opacity: 0.7;
+  }
+`;
+const SortD = styled.button`
+height: 20px;
+width: 20px;
+flex-shrink: 0;
+background: url(${DSort});
+background-size: cover;
+border: 0;
+margin: 10px;
+&:hover {
+    background: url(${DSort_});
+    background-size: cover;
+    border: 0;
+  }
+  &:disabled {
+    cursor: pointer;
+    opacity: 0.7;
+  }
+`;
 
 export function Catalog(){
   const [active, setActive] = useState(genres[0].title);
+  const [sortA, setSortA] = useState(false);
+  const [sortD, setSortD] = useState(false);
     return (
       <>
       <ButtonGroup>
@@ -97,18 +116,24 @@ export function Catalog(){
           </Tab>
         ))}
       </ButtonGroup>
-      <filterBook/>
+      <Filter>
+        
+      <Tooltip title="Ascending sort">
+          <SortA onClick={()=>setSortA((sortA)=>!sortA)}/>
+      </Tooltip>
+            
+      <Tooltip title="Descending sort">
+        <SortD onClick={()=>setSortD((sortD)=>!sortD)}/>
+      </Tooltip>
+
+      </Filter>
       <GalleryBooks>
-        {books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
-        {books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
-        {books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
-        {books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
-        {books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
-        {books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
-        {books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
-        {books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
-        {books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
-        {books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
+        {
+          sortD || sortA ?
+          (sortA ? books.sort((prev, next) => next.rating.avgRate - prev.rating.avgRate).filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />) :
+          books.sort((prev, next) => prev.rating.avgRate - next.rating.avgRate).filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)) :
+          books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)
+        }
       </GalleryBooks>
       </>
     );

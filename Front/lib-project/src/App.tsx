@@ -11,7 +11,7 @@ function App() {
     <Advertisement/>
     <Catalog/>
     </>
-  )
+  );
 }
 
 export default App
