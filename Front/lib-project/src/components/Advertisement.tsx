@@ -39,7 +39,7 @@ const Narrow = styled.div`
 export function Advertisement(){
     return (
         <Gallery>
-         <Wide style ={{background: '#F1EBE5'}}><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81rl4O9aFXHb3yh22sNpma-zNFnZM-fr0FWvv8yroCWdktQHE8bEOiXkMJEuCti9tFiToivxSRqZHfWAFvZ62Ijr1_DY8Q=w1860-h925" alt="Advertisement" style={{width: '100%',height: '100%',objectFit: 'scale-down'}} /></Wide>
+         <Wide style ={{background: '#F1EBE5'}}><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81pbcjDNTNRPmQO2fJ8DcYYCSaXqtES7wKPulGQID7YKZYmUicYqYMigR0GPDeSNiV-YJ5roMccEI_cEB4_E3w_GOa9ZGg=w915-h908" alt="Advertisement" style={{width: '100%',height: '100%',objectFit: 'scale-down'}} /></Wide>
          <Narrow style ={{background: '#2E324F'}}><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81roeJw7VvcgDA6c8pF1eQirro9pP3j-qmzjAJwqOFTMEYPpNHan5vhVDsVufCZKxFaiMimoFhXFDkrDf0rpQeVr6aVuGw=w1860-h925" alt="Advertisement" style={{width: '100%',height: '100%',objectFit: 'contain'}} /></Narrow>
          <Narrow style ={{background: '#C680C6'}}><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81o6in_rTKsLt0x9-Ya_j_-WI8_Ld7XSvhtZLDspzecVZ2yH11nk3eCAgius2NGzuYtxnhkYQ1tvLLLR1AOyN6S2CJVl=w1860-h925" alt="Advertisement" style={{width: '100%',height: '100%',objectFit: 'contain'}} /></Narrow>  
         </Gallery>
