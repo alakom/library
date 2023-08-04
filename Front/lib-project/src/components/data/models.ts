@@ -5,7 +5,7 @@ export interface IClose{
     close: ()=>void,
 };
 export interface IBook{
-    "id":number,
+    "id"?:number,
     "title":string,
     "author":string,
     "genre":string,

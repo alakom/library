@@ -16,9 +16,10 @@ function App() {
     <Navigation/>
     <Advertisement/>
     <Catalog/>
-    {modal && <Modal>
+    {modal && 
+    <Modal>
           <BookDetails/>
-          </Modal>}
+    </Modal>}
     </>
   );
 }

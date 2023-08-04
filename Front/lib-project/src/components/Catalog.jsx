@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import styled from "styled-components";
 import {Book} from "./Book";
 import { books } from './data/Books';
@@ -83,6 +83,14 @@ margin: 10px;
     cursor: pointer;
     opacity: 0.7;
   }
+  ${({active}) =>
+  active &&
+    `
+    background: url(${ASort_});
+    background-size: cover;
+    border: 0;
+  `}
+
 `;
 const SortD = styled.button`
 height: 20px;
@@ -101,13 +109,45 @@ margin: 10px;
     cursor: pointer;
     opacity: 0.7;
   }
+  ${({active}) =>
+  active &&
+    `
+    background: url(${DSort_});
+    background-size: cover;
+    border: 0;
+  `}
 `;
 
 export function Catalog(){
   const [active, setActive] = useState(genres[0].title);
-  const [sortA, setSortA] = useState(false);
-  const [sortD, setSortD] = useState(false);
-    return (
+  const [catalog,setCatalog]= useState(books);
+  const [sortBook,setSort]=useState([false,false]);
+  const booksClone = Array.from(books);
+
+  const aSorting = ()=>{
+    if (sortBook[0]===true){
+      setCatalog((catalog)=>booksClone);
+      setSort((sortBook)=>[false,false]);
+    }
+    else
+    {
+      setCatalog((catalog)=>booksClone.sort((prev, next) => next.rating.avgRate - prev.rating.avgRate).filter(book=>active==="All genres"?book:book.genre===active));
+      setSort((sortBook)=>[true,false]);
+  }
+  }
+
+  const dSorting=()=>{
+    if (sortBook[1]===true){
+      setCatalog((catalog)=>booksClone);
+      setSort((sortBook)=>[false,false]);
+    }
+    else
+    {
+      setCatalog((catalog)=>booksClone.sort((prev, next) => prev.rating.avgRate - next.rating.avgRate).filter(book=>active==="All genres"?book:book.genre===active));
+      setSort((sortBook)=>[false,true])
+    }
+  }
+  return (
       <>
 
 <ButtonGroup>
@@ -115,7 +155,12 @@ export function Catalog(){
           <Tab
           key={genre.title}
           active={+(active === genre.title)}
-          onClick={() => setActive(genre.title)}
+          onClick={() =>
+            {
+            setActive(genre.title);
+            setCatalog((catalog)=>books);
+            setSort((sortBook)=>[false,false]);
+          }}
           >
             {genre.title}
           </Tab>
@@ -126,21 +171,21 @@ export function Catalog(){
       <Filter>
         
       <Tooltip title="Ascending sort">
-          <SortA onClick={()=>setSortA((sortA)=>!sortA)}/>
+          <SortA onClick={aSorting}
+          active={+sortBook[0]}
+          />
       </Tooltip>
             
       <Tooltip title="Descending sort">
-        <SortD onClick={()=>setSortD((sortD)=>!sortD)}/>
+        <SortD 
+        onClick={dSorting}
+        active={+sortBook[1]}
+        />
       </Tooltip>
 
       </Filter>
       <GalleryBooks>
-        {
-          sortD || sortA ?
-          (sortA ? books.sort((prev, next) => next.rating.avgRate - prev.rating.avgRate).filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />) :
-          books.sort((prev, next) => prev.rating.avgRate - next.rating.avgRate).filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)) :
-          books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)
-        }
+        {catalog.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
       </GalleryBooks>
       </>
     );
