@@ -10,7 +10,6 @@ import DSort from './data/icons/Descending.png';
 import DSort_ from './data/icons/DescendingA.png';
 
 
-
 const GalleryBooks=styled.div`
     display: flex;
     grid-gap: 45px;

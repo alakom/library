@@ -18,8 +18,8 @@ const initialState:BookState={
         "avgRate":0,
         "count":0,
     }},
-
-    "visible": false, 
+    
+    "visible": false,
 }
 export const bookSlice=createSlice({
     name:'book',
@@ -27,8 +27,9 @@ export const bookSlice=createSlice({
     reducers:{
         viewBookDetails(state){
             state.visible = !state.visible;
-            if (!state.visible)
-                document.body.style.overflow ="auto"
+            if (!state.visible){
+                document.body.style.overflow ="auto";
+            }
         },
         viewBook(state,actions){
             state.book=actions.payload.book;

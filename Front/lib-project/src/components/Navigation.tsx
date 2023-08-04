@@ -15,12 +15,16 @@ flex-shrink: 0;
 border-bottom: 3px solid #F1F1F2;
 background: #F8F8FA;
 margin-top:0px;
+position: sticky;
+top: 0px;
+z-index:1;
 `;
 const DRight = styled.div`
 display: grid;
 grid-template-columns: 50px 50px;
 align-items: center;
  justify-content: center;
+ background: #F8F8FA;
 
 `;
 const DLeft = styled.div`
@@ -28,11 +32,13 @@ display: grid;
 align-items: center;
 justify-content: center;
 margin-left;
+background: #F8F8FA;
 `;
 const DLogo = styled.div`
 display: grid;
 align-items: center;
 justify-content: center;
+background: #F8F8FA;
 `;
 
 const Logo=styled.img`
