@@ -1,11 +1,8 @@
 import styled from "styled-components";
+import { BookProps,IClose } from './data/models';
 import { Tooltip } from 'antd';
 import Close1 from './data/icons/close.png';
 import CloseB from './data/icons/closeB.png';
-
-import { RootState } from '../store';
-import { useSelector, useDispatch } from 'react-redux';
-import { viewBookDetails} from '../store/bookSlice';
 
 const DivForm = styled.form`
 display: grid;
@@ -52,7 +49,6 @@ box-sizing: border-box;
 max-height: 100%;
 border-radius: 5px 0px 0px 5px;
 pointer-events: none;
-background-size: cover;
 -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
@@ -150,13 +146,10 @@ margin: 0px;
 border:0px;
 flex-shrink: 0;
 `;
-export function BookDetails(){
-  const book = useSelector((state: RootState) => state.book.book)
-  const dispatch = useDispatch()
-
+export function BookDetails({book} : BookProps,{close}:IClose){
 return (
     <DivForm>
-    <In><Img src = {book.image} alt={book.title} style={{width: '100%',height: '100%',objectFit: 'fill'}}/></In>
+    <In><Img src = {book.image} alt={book.title}/></In>
     
     <Title>
     <HGenre>{book.genre}</HGenre>
@@ -165,9 +158,8 @@ return (
         <HRate>Rate: {book.rating.avgRate}</HRate>
         <Ds>{book.description}</Ds>
     </Title>
-    <Name>    
-      <Tooltip title="Close book details">
-    <But onClick={()=>dispatch(viewBookDetails())}/>
+    <Name>    <Tooltip title="Close book details">
+    <But onClick={close}/>
     </Tooltip></Name>
 
     

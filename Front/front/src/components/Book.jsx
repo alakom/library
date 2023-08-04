@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState}  from 'react';
 import styled from "styled-components";
 import { BookProps } from './data/models';
 import { Tooltip } from 'antd';
+import { BookDetails } from './BookDetails';
+import { Modal } from './Modal';
 
 const Div = styled.div`
 width: 369px;
@@ -117,12 +119,11 @@ box-shadow: -1px 2px 4px 0px rgba(0, 0, 0, 0.25);
     margin-right: 14px;
     left: 185px;
 `;
-function clickMe() {
-    alert("You clicked me!");
-  };
 
 export function Book({book} : BookProps){
+  const [modal,setModal] = useState(false);
     return(
+      <>
         <Div>
         <Img src={book.image} alt={book.title}/>
         <Title>
@@ -132,8 +133,15 @@ export function Book({book} : BookProps){
         <HRate>{book.rating.avgRate}</HRate>
         </Title>
         <Tooltip title="View the description of the book">
-        <Details onClick={clickMe}>Book details</Details>
+        <Details onClick={()=>setModal((modal)=>!modal)}>Book details</Details>
         </Tooltip>
         </Div>
+        {modal && <Modal>
+          <BookDetails 
+          book={book} 
+          close={()=>setModal((modal)=>!modal)}
+          />
+          </Modal>}
+      </>
     );
 }

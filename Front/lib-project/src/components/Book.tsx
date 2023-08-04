@@ -1,9 +1,9 @@
-import React, { useState}  from 'react';
+
 import styled from "styled-components";
 import { BookProps } from './data/models';
 import { Tooltip } from 'antd';
-import { BookDetails } from './BookDetails';
-import { Modal } from './Modal';
+import { useDispatch } from 'react-redux';
+import { viewBookDetails, viewBook } from '../store/bookSlice';
 
 const Div = styled.div`
 width: 369px;
@@ -121,7 +121,13 @@ box-shadow: -1px 2px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 
 export function Book({book} : BookProps){
-  const [modal,setModal] = useState(false);
+  const dispatch = useDispatch()
+
+  const onBookDetails =()=>{
+    dispatch(viewBook({book}))
+    dispatch(viewBookDetails())
+  }
+
     return(
       <>
         <Div>
@@ -133,15 +139,9 @@ export function Book({book} : BookProps){
         <HRate>{book.rating.avgRate}</HRate>
         </Title>
         <Tooltip title="View the description of the book">
-        <Details onClick={()=>setModal((modal)=>!modal)}>Book details</Details>
+        <Details onClick={onBookDetails}>Book details</Details>
         </Tooltip>
         </Div>
-        {modal && <Modal>
-          <BookDetails 
-          book={book} 
-          close={()=>setModal((modal)=>!modal)}
-          />
-          </Modal>}
       </>
     );
 }

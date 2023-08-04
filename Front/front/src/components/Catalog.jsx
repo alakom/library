@@ -9,8 +9,6 @@ import ASort_ from './data/icons/AscendingA.png';
 import DSort from './data/icons/Descending.png';
 import DSort_ from './data/icons/DescendingA.png';
 
-
-
 const GalleryBooks=styled.div`
     display: flex;
     grid-gap: 45px;
@@ -24,7 +22,6 @@ const GalleryBooks=styled.div`
     background: #FFF;
     margin-top: 0px;
 `;
-
 const Tab = styled.button`
 color: #9FA4A7;
 font-size: 18px;
@@ -39,18 +36,17 @@ padding-bottom: 8px;
  opacity: 0.6;
  border: 0;
  outline: 0;
- &:hover {
-  color: #5973BD;
-}
-  ${({active}) =>
-  active &&
+  ${({ active }) =>
+ active &&
     `
     color: #5973BD;
     border-bottom: 2px solid #5973BD;
     opacity: 1;
   `}
+  &:hover {
+    color: #5973BD;
+  }
 `;
-
 const ButtonGroup = styled.div`
  display: flex;
  align-items: center;
@@ -109,20 +105,17 @@ export function Catalog(){
   const [sortD, setSortD] = useState(false);
     return (
       <>
-
-<ButtonGroup>
+      <ButtonGroup>
         {genres.map(genre => (
           <Tab
           key={genre.title}
-          active={+(active === genre.title)}
+          active={active === genre.title}
           onClick={() => setActive(genre.title)}
           >
             {genre.title}
           </Tab>
         ))}
       </ButtonGroup>
-
-
       <Filter>
         
       <Tooltip title="Ascending sort">
@@ -137,9 +130,9 @@ export function Catalog(){
       <GalleryBooks>
         {
           sortD || sortA ?
-          (sortA ? books.sort((prev, next) => next.rating.avgRate - prev.rating.avgRate).filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />) :
-          books.sort((prev, next) => prev.rating.avgRate - next.rating.avgRate).filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)) :
-          books.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)
+          (sortA ? books.books_list.sort((prev, next) => next.rating.avgRate - prev.rating.avgRate).filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />) :
+          books.books_list.sort((prev, next) => prev.rating.avgRate - next.rating.avgRate).filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)) :
+          books.books_list.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)
         }
       </GalleryBooks>
       </>

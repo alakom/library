@@ -15,6 +15,7 @@ align-items: center;
  right:0px;
  left: 0px;
  margin: 0;
+ z-index: 999;
 `;
 
 interface ModalProps{
