@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Tooltip } from 'antd';
-import Close1 from './data/icons/close.png';
-import CloseB from './data/icons/closeB.png';
+import Close from './data/icons/close.png';
+import Close_ from './data/icons/closeB.png';
 
 import { RootState } from '../store';
 import { useSelector, useDispatch } from 'react-redux';
@@ -26,17 +26,17 @@ position: relative;
 box-sizing: border-box;
 padding: 0px;
 `;
-const But = styled.button`
+const ButtonClose = styled.button`
 position: sticky;
 height: 20px;
 width: 20px;
 flex-shrink: 0;
-background: url(${Close1});
+background: url(${Close});
 background-size: cover;
 border: 0;
 margin: 5px;
 &:hover {
-    background: url(${CloseB});
+    background: url(${Close_});
     background-size: cover;
     border: 0;
   }
@@ -167,10 +167,8 @@ return (
     </Title>
     <Name>    
       <Tooltip title="Close book details">
-    <But onClick={()=>dispatch(viewBookDetails())}/>
+    <ButtonClose onClick={()=>dispatch(viewBookDetails())}/>
     </Tooltip></Name>
-
-    
     </DivForm>
 );
 }
