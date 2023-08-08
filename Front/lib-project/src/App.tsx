@@ -1,11 +1,11 @@
 
-import { Advertisement } from './components/Advertisement'
-import { Navigation } from './components/Navigation'
-import {Catalog} from "./components/Catalog"
-import { BookDetails } from './components/BookDetails'
+import Advertisement from './components/Advertisement'
+import Navigation from './components/Navigation'
+import Catalog from "./components/Catalog"
+import BookDetails from './components/BookDetails'
 import SignIn from './components/SignIn';
 import CreateAccount from './components/createAccount';
-import { Modal } from './components/Modal'
+import Modal from './components/Modal'
 import { RootState } from './store'
 import { useSelector} from 'react-redux';
 
