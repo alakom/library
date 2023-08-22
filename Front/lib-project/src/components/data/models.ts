@@ -14,7 +14,7 @@ export interface IBook{
     "rating":
     {
         "avgRate":number,
-        "count":number,
+        "count"?:number,
     }
 };
 export interface IGenre{

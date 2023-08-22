@@ -28,6 +28,7 @@ position: relative;
 box-sizing: border-box;
 padding: 0px;
 `;
+
 const ButtonClose = styled.button`
 position: absolute;
 
@@ -51,6 +52,7 @@ margin: 5px;
     opacity: 0.7;
   }
 `;
+
 const InputForm = styled.div`
 width: 80%;
 height: 80%;
@@ -63,6 +65,7 @@ border-radius: 5px;
 background: #FFF;
 box-shadow: -1px 4px 4px 0px rgba(0, 0, 0, 0.35);
 `;
+
 const H1 = styled.h1`
 color: #8D93C7;
 font-family: Montserrat Alternates;

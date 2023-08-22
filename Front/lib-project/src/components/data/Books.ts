@@ -1,5 +1,5 @@
 import { IBook } from "./models";
-export const books:IBook[] =[
+export let books:IBook[] =[
 		{
 		"id":1,
 	    "title":"11/22/63",

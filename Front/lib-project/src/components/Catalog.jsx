@@ -1,19 +1,35 @@
 import React, { useCallback, useEffect, useState} from 'react';
 
 import Book from "./Book";
-import { books } from './data/Books';
 import { genres } from './data/Genres';
 import {Tooltip } from 'antd';
 
 import * as NavCatalog from './style/NavCatalogStyle';
 import * as FilterCatalog from './style/FilterCatalogStyle';
 import { GalleryBooks } from './style/CatalogStyle';
+import { useDispatch, useSelector} from 'react-redux';
+import { addBook,viewEditBooks } from '../store/editBookSlice';
+import  * as catalogReducers from '../store/catalogSlice';
+
+
 
 export default function Catalog(){
+
+  const books = useSelector(state =>state.catalog.books);
+
   const [active, setActive] = useState(genres[0].title);
   const [catalog,setCatalog]= useState(books);
   const [sortBook,setSort]=useState([false,false]);
+  const dispatch = useDispatch();
+
   const booksClone = Array.from(books);
+
+  const openAddBook = useCallback(()=>
+  {
+    dispatch(addBook());
+    dispatch(viewEditBooks());
+  }
+  ,[]);
 
   const aSorting = useCallback(()=>{
     if (sortBook[0]===true){
@@ -72,7 +88,16 @@ export default function Catalog(){
         active={+sortBook[1]}
         />
       </Tooltip>
+
+      <Tooltip title="Add a new book">
+        <FilterCatalog.AddBook
+          onClick={openAddBook}
+        />
+      </Tooltip>
+      
       </FilterCatalog.Filter>
+
+      
 
       <GalleryBooks>
         {catalog.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
