@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import editBookButton from '../data/icons/editBooks.png';
+import editBookButton_ from '../data/icons/editBooksA.png';
 
 export const DivBackground = styled.div`
 width: 369px;
@@ -113,4 +115,26 @@ box-shadow: -1px 2px 4px 0px rgba(0, 0, 0, 0.25);
     margin-left: 14px;
     margin-right: 14px;
     left: 185px;
+`;
+export const EditBtn = styled.button`
+position: absolute;
+top: -30px;
+left: 10px;
+
+height: 35px;
+width: 35px;
+flex-shrink: 0;
+background: url(${editBookButton});
+background-size: cover;
+border: 0;
+margin: 10px;
+&:hover {
+    background: url(${editBookButton_});
+    background-size: cover;
+    border: 0;
+  }
+  &:disabled {
+    cursor: pointer;
+    opacity: 0.7;
+  }
 `;

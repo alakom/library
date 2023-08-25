@@ -3,6 +3,9 @@ import { IBook} from '../components/data/models';
 interface IEdit{
     "book":IBook,
     "visible":boolean,
+    title: string,
+    editAdd: string,
+    cancelDelete: string
 }
 const initialState:IEdit={
     "book": {
@@ -18,25 +21,32 @@ const initialState:IEdit={
         }},
         
         "visible": false,
+        title: "",
+        editAdd: "",
+        cancelDelete: ""
 }
-export const editBookSlice = createSlice({
-    name: "editBook",
+export const editBookWindowSlice = createSlice({
+    name: "editWindow",
     initialState,
     reducers:{
-        viewEditBooks(state){
+        viewEditBooks(state, action){
+            state.title = action.payload.title;
+            state.editAdd = action.payload.editAdd;
+            state.cancelDelete=action.payload.cancelDelete;
             state.visible = !state.visible;
             if (!state.visible){
                 document.body.style.overflow ="auto";
             }
         },
-        addBook(state){
+        addWindowBook(state){
             state.book = initialState.book;
         },
-        editBook(state,actions){
+        editWindowBook(state,actions){
+            console.log(actions.payload.book);
             state.book = actions.payload.book;
         },
     }
 })
 
-export const {viewEditBooks,addBook,editBook} = editBookSlice.actions;
-export default editBookSlice.reducer;
+export const {viewEditBooks,addWindowBook,editWindowBook} = editBookWindowSlice.actions;
+export default editBookWindowSlice.reducer;

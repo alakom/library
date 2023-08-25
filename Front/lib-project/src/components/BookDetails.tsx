@@ -2,10 +2,10 @@ import * as style from './style/BookDetailsStyle';
 import { Tooltip } from 'antd';
 import { RootState } from '../store';
 import { useSelector, useDispatch } from 'react-redux';
-import { viewBookDetails} from '../store/bookSlice';
+import { viewBookDetails} from '../store/bookDetailsSlice';
 
 export default function BookDetails(){
-  const book = useSelector((state: RootState) => state.book.book)
+  const book = useSelector((state: RootState) => state.bookDetails.book)
   const dispatch = useDispatch()
 
 return (

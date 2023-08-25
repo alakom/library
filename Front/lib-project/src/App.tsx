@@ -12,10 +12,10 @@ import { useSelector} from 'react-redux';
 
 
 function App() {
-  const modalBookDetails = useSelector((state: RootState) => state.book.visible);
+  const modalBookDetails = useSelector((state: RootState) => state.bookDetails.visible);
   const modalSignIn = useSelector((state: RootState) => state.user.visibleSignIn);
   const modalCreateAccount = useSelector((state: RootState) => state.user.visibleCreateAccount);
-  const modalEditBook = useSelector((state: RootState)=> state.editBook.visible);
+  const modalEditBook = useSelector((state: RootState)=> state.editWindow.visible);
   return (
     <>
     <Navigation/>

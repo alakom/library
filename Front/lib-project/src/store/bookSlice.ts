@@ -1,41 +1,33 @@
-import {createSlice} from '@reduxjs/toolkit';
-import { IBook} from '../components/data/models';
+import { IBook } from "../components/data/models";
+import { createSlice } from "@reduxjs/toolkit";
+import { cloneDeep } from "lodash";
 
 interface BookState{
-    "book": IBook,
-    "visible": boolean,
+    booksServer: IBook[],
+    booksClone: IBook[]
 }
 
 const initialState:BookState={
-    "book": {
-    "title":"string",
-    "author":"string",
-    "genre":"string",
-    "description":"string",
-    "image":"string",
-    "rating":
-    {
-        "avgRate":0,
-        "count":0,
-    }},
-    
-    "visible": false,
+    booksServer: [],
+    booksClone:[]
 }
+
 export const bookSlice=createSlice({
-    name:'book',
+    name: 'book',
     initialState,
     reducers:{
-        viewBookDetails(state){
-            state.visible = !state.visible;
-            if (!state.visible){
-                document.body.style.overflow ="auto";
-            }
+        addNewBook(state,action){
+            state.booksServer.push(action.payload.newBook);
+            state.booksClone.push(action.payload.newBook);
+            console.log(action.payload.newBook);
+
         },
-        viewBook(state,actions){
-            state.book=actions.payload.book;
-        }
-    },
+        setBook(state,action){
+            state.booksServer = action.payload.books;
+            state.booksClone = cloneDeep(action.payload.books);
+        },
+    }
 })
 
-export const {viewBookDetails,viewBook} = bookSlice.actions
+export const {addNewBook, setBook} = bookSlice.actions
 export default bookSlice.reducer;

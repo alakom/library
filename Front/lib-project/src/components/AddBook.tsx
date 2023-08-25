@@ -1,48 +1,64 @@
 import { Tooltip } from 'antd';
 import * as style from './style/editBook';
-import { useDispatch } from 'react-redux';
-import { addBook,viewEditBooks } from '../store/editBookSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store';
+import { addWindowBook,viewEditBooks } from '../store/editBookWindowSlice';
 import { useCallback, useState } from 'react';
 import { IBook } from './data/models';
-import { addNewBook } from '../store/catalogSlice';
+import { addNewBook } from '../store/bookSlice';
 
 
 export default function AddBook(){
     const dispatch = useDispatch();
-    const openAdd = useCallback(()=>{
-        dispatch(addBook());
-        dispatch(viewEditBooks());
+    const TitleH1= useSelector((state:RootState)=> state.editWindow.title);
+    const ButtonAddSave = useSelector((state:RootState)=>state.editWindow.editAdd);
+    const ButtonCancelDelete = useSelector((state:RootState)=>state.editWindow.cancelDelete);
+    const book = useSelector((state:RootState)=>state.editWindow.book);
+    const [title,setTitle]=useState(book.title);
+    const [author,setAuthor]=useState(book.author);
+    const [genre,setGenre]=useState(book.genre);
+    const [description,setDescription]=useState(book.description);
+    const [rate,setRate]=useState(book.rating.avgRate);
+
+    const closeWindow = useCallback(()=>{
+            dispatch(addWindowBook());
+            dispatch(viewEditBooks(""));
+        },[]);
+    
+    const addSave = useCallback(()=>{
+        if (TitleH1==="Adding a Book to the Library"){
+                const id = new Date();
+                 let newBook:IBook = {
+                "id": id.getTime(),
+                "title": title,
+                "author":author,
+                "genre":genre,
+                "description":description,
+                "image":'https://binaries.templates.cdn.office.net/support/templates/ru-ru/lt22301254_quantized.png',
+                "rating":
+                    {
+                        "avgRate":+rate,
+                        "count":10,
+                    }
+            };
+            dispatch(addNewBook({newBook}));
+            closeWindow();
+        }
+
     },[]);
-    const [title,setTitle]=useState('');
-    const [author,setAuthor]=useState('');
-    const [genre,setGenre]=useState('');
-    const [description,setDescription]=useState('');
-    const [rate,setRate]=useState('');
 
-    const updateCatalog=()=>{
-        let newBook:IBook = {
-            "id":100,
-            "title": title,
-            "author":author,
-            "genre":genre,
-            "description":description,
-            "image":'rrr',
-            "rating":
-                {
+    const cancelDel = useCallback(()=>{
+        if (TitleH1==="Adding a Book to the Library"){
+            closeWindow();
+        }
 
-                    "avgRate":+rate,
-                    "count":10,
-                }
-        };
-        dispatch(addNewBook({newBook}));
-        openAdd();
+    },[]);
 
-    }
 
     return(
         <>
         <style.InputForm>
-            <style.H1>Adding a Book to the Library</style.H1>
+            <style.H1>{TitleH1}</style.H1>
             <style.DivInput>
                 <style.H6>Введите название</style.H6>
                 <style.Input value={title} onChange={(event)=>setTitle(event.target.value)}></style.Input>
@@ -65,14 +81,15 @@ export default function AddBook(){
 
             <style.DivInput >
                 <style.H6>Введите среднюю оценку</style.H6>
-                <style.Input value={rate} onChange={(event)=>setRate(event.target.value)}></style.Input>
+                <style.Input value={rate} onChange={(event)=>setRate(+event.target.value)}></style.Input>
             </style.DivInput>
 
-            <style.BtnAdd onClick={updateCatalog}>Добавить книгу</style.BtnAdd>
+            <style.BtnAdd onClick={cancelDel}>{ButtonCancelDelete}</style.BtnAdd>
+            <style.BtnAdd onClick={addSave}>{ButtonAddSave}</style.BtnAdd>
 
             <Tooltip title="Close the window">
                 <style.ButtonClose
-                    onClick={openAdd}/>
+                    onClick={closeWindow}/>
             </Tooltip>
         </style.InputForm>
         
