@@ -18,6 +18,7 @@ export default function Catalog(){
   //const [catalog,setCatalog]= useState(books);
   const [sortBook,setSort]=useState([false,false]);
   const dispatch = useDispatch();
+
   const catalog = useSelector(state=>state.book.booksClone);
 
   useEffect(()=>{

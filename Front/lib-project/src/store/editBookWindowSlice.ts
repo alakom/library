@@ -42,7 +42,6 @@ export const editBookWindowSlice = createSlice({
             state.book = initialState.book;
         },
         editWindowBook(state,actions){
-            console.log(actions.payload.book);
             state.book = actions.payload.book;
         },
     }

@@ -5,7 +5,7 @@ import { RootState } from '../store';
 import { addWindowBook,viewEditBooks } from '../store/editBookWindowSlice';
 import { useCallback, useState } from 'react';
 import { IBook } from './data/models';
-import { addNewBook } from '../store/bookSlice';
+import { addNewBook, editBook } from '../store/bookSlice';
 
 
 export default function AddBook(){
@@ -25,27 +25,44 @@ export default function AddBook(){
             dispatch(viewEditBooks(""));
         },[]);
     
-    const addSave = useCallback(()=>{
+    const addSave =()=>{
         if (TitleH1==="Adding a Book to the Library"){
                 const id = new Date();
-                 let newBook:IBook = {
-                "id": id.getTime(),
+                const newBook:IBook = {
+                    "id": id.getTime(),
+                    "title": title,
+                    "author":author,
+                    "genre":genre,
+                    "description":description,
+                    "image":'https://binaries.templates.cdn.office.net/support/templates/ru-ru/lt22301254_quantized.png',
+                    "rating":
+                        {
+                            "avgRate":+rate,
+                            "count":10,
+                        }
+                };
+            dispatch(addNewBook({newBook}));
+            closeWindow();
+        }
+        else{
+            const upDateBook:IBook = {
+                "id": book.id,
                 "title": title,
                 "author":author,
                 "genre":genre,
                 "description":description,
-                "image":'https://binaries.templates.cdn.office.net/support/templates/ru-ru/lt22301254_quantized.png',
+                "image":book.image,
                 "rating":
                     {
                         "avgRate":+rate,
                         "count":10,
                     }
             };
-            dispatch(addNewBook({newBook}));
+            dispatch(editBook({upDateBook}));
             closeWindow();
         }
 
-    },[]);
+    };
 
     const cancelDel = useCallback(()=>{
         if (TitleH1==="Adding a Book to the Library"){
