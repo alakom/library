@@ -29,8 +29,16 @@ export const bookSlice=createSlice({
             state.booksClone[id]=action.payload.upDateBook;
             state.booksServer[id]=action.payload.upDateBook;
         },
+        delBook(state, action){
+            const id = state.booksClone.findIndex(book=>book.id===action.payload.book.id);
+            state.booksClone.splice(id,1);
+            state.booksServer.splice(id,1);
+        },
+        searchBook(state, action){
+            state.booksClone.filter(book=>book.title==action.payload)
+        }
     }
 })
 
-export const {addNewBook, setBook, editBook} = bookSlice.actions
+export const {addNewBook, setBook, editBook, delBook, searchBook} = bookSlice.actions
 export default bookSlice.reducer;

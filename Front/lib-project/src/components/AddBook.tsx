@@ -5,7 +5,7 @@ import { RootState } from '../store';
 import { addWindowBook,viewEditBooks } from '../store/editBookWindowSlice';
 import { useCallback, useState } from 'react';
 import { IBook } from './data/models';
-import { addNewBook, editBook } from '../store/bookSlice';
+import { addNewBook, editBook, delBook } from '../store/bookSlice';
 
 
 export default function AddBook(){
@@ -61,11 +61,14 @@ export default function AddBook(){
             dispatch(editBook({upDateBook}));
             closeWindow();
         }
-
     };
 
     const cancelDel = useCallback(()=>{
         if (TitleH1==="Adding a Book to the Library"){
+            closeWindow();
+        }
+        else{
+            dispatch(delBook({book}));
             closeWindow();
         }
 
