@@ -35,7 +35,7 @@ export const bookSlice=createSlice({
             state.booksServer.splice(id,1);
         },
         searchBook(state, action){
-            state.booksClone.filter(book=>book.title==action.payload)
+            console.log('произошёл поиск')
         }
     }
 })

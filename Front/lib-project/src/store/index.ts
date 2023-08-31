@@ -3,6 +3,7 @@ import bookReducer from './bookDetailsSlice';
 import userReducer from './userSlice';
 import editBookWindowSlice from './editBookWindowSlice';
 import bookSlice from './bookSlice';
+import searchSlice from './searchSlice';
 
 export const store = configureStore({
     reducer:{
@@ -10,6 +11,7 @@ export const store = configureStore({
         user:userReducer,
         editWindow: editBookWindowSlice,
         book: bookSlice,
+        search: searchSlice,
     }
 })
 

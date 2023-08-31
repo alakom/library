@@ -7,6 +7,7 @@ import SignIn from './components/SignIn';
 import CreateAccount from './components/createAccount';
 import AddBook from './components/AddBook';
 import Modal from './components/Modal'
+import SearchBookModal from './components/searchBookModal';
 import { RootState } from './store'
 import { useSelector} from 'react-redux';
 
@@ -16,6 +17,8 @@ function App() {
   const modalSignIn = useSelector((state: RootState) => state.user.visibleSignIn);
   const modalCreateAccount = useSelector((state: RootState) => state.user.visibleCreateAccount);
   const modalEditBook = useSelector((state: RootState)=> state.editWindow.visible);
+  const modalSearch = useSelector((state:RootState)=>state.search.visibleWindowSearch);
+
   return (
     <>
     <Navigation/>
@@ -44,6 +47,13 @@ function App() {
       <AddBook/>
     </Modal>
     }
+
+    {modalSearch &&
+    <Modal>
+      <SearchBookModal />
+    </Modal>
+    }
+
     </>
   );
 }
