@@ -3,7 +3,6 @@ import { books } from './data/Books';
 import Book from "./Book";
 import { genres } from './data/Genres';
 import {Tooltip } from 'antd';
-
 import * as NavCatalog from './style/NavCatalogStyle';
 import * as FilterCatalog from './style/FilterCatalogStyle';
 import { GalleryBooks } from './style/CatalogStyle';
@@ -13,18 +12,24 @@ import  * as bookReducers from '../store/bookSlice';
 
 
 
-export default function Catalog(){
+export default function Catalog({catalog}){
   const [active, setActive] = useState(genres[0].title);
   //const [catalog,setCatalog]= useState(books);
   const [sortBook,setSort]=useState([false,false]);
   const dispatch = useDispatch();
 
-  const catalog = useSelector(state=>state.book.booksClone);
+ 
 
-  useEffect(()=>{
-    dispatch(bookReducers.setBook({books}));
-  },[]);
+  const renderCatalog=()=>{
 
+      //dispatch(bookReducers.filterGenre({active}));
+
+    return(
+      <>
+      {catalog.map(book=><Book book={book} key={book.id} />)}
+      </>
+    );
+  };
   const openAddBookWindow = useCallback(()=>
   {
     dispatch(addWindowBook());
@@ -105,7 +110,7 @@ export default function Catalog(){
       
 
       <GalleryBooks>
-        {catalog.filter(book=>active==="All genres"?book:book.genre===active).map(book=><Book book={book} key={book.id} />)}
+        {renderCatalog()}
       </GalleryBooks>
       </>
     );

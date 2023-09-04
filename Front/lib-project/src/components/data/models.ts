@@ -1,6 +1,9 @@
 export interface BookProps{
     book: IBook,
 };
+export interface CatalogProps{
+    catalog: IBook[],
+};
 export interface IClose{
     close: ()=>void,
 };

@@ -36,9 +36,19 @@ export const bookSlice=createSlice({
         },
         searchBook(state, action){
             console.log('произошёл поиск')
-        }
+        },
+        aSorting(state){
+
+        },
+        dSorting(state){
+
+        },
+        filterGenre(state, action){
+            state.booksClone = cloneDeep(state.booksServer);
+            state.booksClone.filter(book=>action.payload.active==="All genres"?book:book.genre===action.payload.active);
+        },
     }
 })
 
-export const {addNewBook, setBook, editBook, delBook, searchBook} = bookSlice.actions
+export const {addNewBook, setBook, editBook, delBook, searchBook, aSorting, dSorting, filterGenre} = bookSlice.actions;
 export default bookSlice.reducer;

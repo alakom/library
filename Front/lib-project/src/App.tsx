@@ -9,8 +9,10 @@ import AddBook from './components/AddBook';
 import Modal from './components/Modal'
 import SearchBookModal from './components/searchBookModal';
 import { RootState } from './store'
-import { useSelector} from 'react-redux';
-
+import { useSelector, useDispatch} from 'react-redux';
+import { useEffect } from 'react';
+import  * as bookReducers from './store/bookSlice';
+import { books } from './components/data/Books';
 
 function App() {
   const modalBookDetails = useSelector((state: RootState) => state.bookDetails.visible);
@@ -18,12 +20,19 @@ function App() {
   const modalCreateAccount = useSelector((state: RootState) => state.user.visibleCreateAccount);
   const modalEditBook = useSelector((state: RootState)=> state.editWindow.visible);
   const modalSearch = useSelector((state:RootState)=>state.search.visibleWindowSearch);
+  const dispatch =useDispatch();
+
+  const catalog = useSelector((state: RootState)=>state.book.booksClone);
+
+  useEffect(()=>{
+    dispatch(bookReducers.setBook({books}));
+  },[]);
 
   return (
     <>
     <Navigation/>
     <Advertisement/>
-    <Catalog/>
+    <Catalog catalog={catalog}/>
 
     {modalBookDetails && 
     <Modal>
