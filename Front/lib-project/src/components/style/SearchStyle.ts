@@ -5,8 +5,8 @@ import Close_ from '../data/icons/closeS.png';
 export const ButtonClose = styled.button`
 position: absolute;
 
-top: 0.5%;
-left: 94%;
+top: 10.5%;
+left: 88.5%;
 
 height: 20px;
 width: 20px;
@@ -26,8 +26,8 @@ margin: 5px;
   }
 `;
 export const InputForm = styled.div`
-width: 80%;
-height: 80%;
+width: 1500px;
+
 display: flex;
 flex-direction: column;
 justify-content: space-evenly;

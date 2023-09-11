@@ -34,10 +34,6 @@ function App() {
     <Advertisement/>
     <Catalog catalog={catalog}/>
 
-    {modalBookDetails && 
-    <Modal>
-          <BookDetails/>
-    </Modal>}
 
     {modalSignIn &&
     <Modal>
@@ -63,6 +59,10 @@ function App() {
     </Modal>
     }
 
+    {modalBookDetails && 
+    <Modal>
+          <BookDetails/>
+    </Modal>}
     </>
   );
 }

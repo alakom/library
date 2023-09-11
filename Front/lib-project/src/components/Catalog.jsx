@@ -6,7 +6,7 @@ import {Tooltip } from 'antd';
 import * as NavCatalog from './style/NavCatalogStyle';
 import * as FilterCatalog from './style/FilterCatalogStyle';
 import { GalleryBooks } from './style/CatalogStyle';
-import { useDispatch, useSelector} from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { addWindowBook,viewEditBooks } from '../store/editBookWindowSlice';
 import  * as bookReducers from '../store/bookSlice';
 
@@ -14,22 +14,13 @@ import  * as bookReducers from '../store/bookSlice';
 
 export default function Catalog({catalog}){
   const [active, setActive] = useState(genres[0].title);
-  //const [catalog,setCatalog]= useState(books);
   const [sortBook,setSort]=useState([false,false]);
   const dispatch = useDispatch();
 
- 
+  useEffect(()=>{
+    dispatch(bookReducers.filterGenre({active}));
+  },[active]);
 
-  const renderCatalog=()=>{
-
-      //dispatch(bookReducers.filterGenre({active}));
-
-    return(
-      <>
-      {catalog.map(book=><Book book={book} key={book.id} />)}
-      </>
-    );
-  };
   const openAddBookWindow = useCallback(()=>
   {
     dispatch(addWindowBook());
@@ -40,29 +31,29 @@ export default function Catalog({catalog}){
     }));
   }  ,[]);
 
-  // const aSorting = useCallback(()=>{
-  //   if (sortBook[0]===true){
-  //     setCatalog((catalog)=>booksClone);
-  //     setSort((sortBook)=>[false,false]);
-  //   }
-  //   else
-  //   {
-  //     setCatalog((catalog)=>booksClone.sort((prev, next) => next.rating.avgRate - prev.rating.avgRate).filter(book=>active==="All genres"?book:book.genre===active));
-  //     setSort((sortBook)=>[true,false]);
-  // }
-  // },[catalog]);
+  const aSorting = useCallback(()=>{
+    if (sortBook[0]===true){
+      dispatch(bookReducers.filterGenre({active}));
+      setSort((sortBook)=>[false,false]);
+    }
+    else
+    {
+      dispatch(bookReducers.aSortingCatalog());
+      setSort((sortBook)=>[true,false]);
+  }
+  },[catalog]);
 
-  // const dSorting=useCallback(()=>{
-  //   if (sortBook[1]===true){
-  //     setCatalog((catalog)=>booksClone);
-  //     setSort((sortBook)=>[false,false]);
-  //   }
-  //   else
-  //   {
-  //     setCatalog((catalog)=>booksClone.sort((prev, next) => prev.rating.avgRate - next.rating.avgRate).filter(book=>active==="All genres"?book:book.genre===active));
-  //     setSort((sortBook)=>[false,true])
-  //   }
-  // },[catalog]);
+  const dSorting=useCallback(()=>{
+    if (sortBook[1]===true){
+      dispatch(bookReducers.filterGenre({active}));
+      setSort((sortBook)=>[false,false]);
+    }
+    else
+    {
+      dispatch(bookReducers.dSortingCatalog());
+      setSort((sortBook)=>[false,true])
+    }
+  },[catalog]);
 
   return (
       <>
@@ -74,7 +65,6 @@ export default function Catalog({catalog}){
           onClick={() =>
             {
             setActive(genre.title);
-            setCatalog((catalog)=>books);
             setSort((sortBook)=>[false,false]);
           }}
           >
@@ -86,15 +76,15 @@ export default function Catalog({catalog}){
 
       <FilterCatalog.Filter>
       <Tooltip title="Ascending sort">
-          <FilterCatalog.SortA 
-          // onClick={aSorting}
+          <FilterCatalog.SortA
+          onClick={aSorting}
           active={+sortBook[0]}
           />
       </Tooltip>
             
       <Tooltip title="Descending sort">
         <FilterCatalog.SortD 
-        // onClick={dSorting}
+        onClick={dSorting}
         active={+sortBook[1]}
         />
       </Tooltip>
@@ -107,10 +97,8 @@ export default function Catalog({catalog}){
       
       </FilterCatalog.Filter>
 
-      
-
       <GalleryBooks>
-        {renderCatalog()}
+        {catalog.map(book=><Book book={book} key={book.id} />)}
       </GalleryBooks>
       </>
     );

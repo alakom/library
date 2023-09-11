@@ -5,6 +5,7 @@ import * as style from './style/HeaderStyle';
 import { RootState } from '../store';
 import { useSelector, useDispatch } from 'react-redux';
 import { openWindowSignIn } from "../store/userSlice";
+import { openWindow } from '../store/searchSlice';
 
 
 
@@ -15,7 +16,8 @@ export default function Navigation(){
         <style.Nav>
             <style.DLeft>
                 <Tooltip title="Search books">
-                    <style.ButtonSearch/>
+                    <style.ButtonSearch 
+                    onClick={()=>dispatch(openWindow())}/>
                 </Tooltip>  
               </style.DLeft>
 

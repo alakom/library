@@ -35,20 +35,23 @@ export const bookSlice=createSlice({
             state.booksServer.splice(id,1);
         },
         searchBook(state, action){
-            console.log('произошёл поиск')
+            console.log('произошёл поиск');
         },
-        aSorting(state){
-
+        aSortingCatalog(state){
+            state.booksClone = state.booksClone.sort((prev, next) => next.rating.avgRate - prev.rating.avgRate);
         },
-        dSorting(state){
-
+        dSortingCatalog(state){
+           state.booksClone= state.booksClone.sort((prev, next) => prev.rating.avgRate - next.rating.avgRate);
+        },
+        updateCatalog(state){
+            state.booksClone = cloneDeep(state.booksServer);
         },
         filterGenre(state, action){
             state.booksClone = cloneDeep(state.booksServer);
-            state.booksClone.filter(book=>action.payload.active==="All genres"?book:book.genre===action.payload.active);
+            state.booksClone = state.booksClone.filter(book=>action.payload.active==="All genres"?book:book.genre===action.payload.active);
         },
     }
 })
 
-export const {addNewBook, setBook, editBook, delBook, searchBook, aSorting, dSorting, filterGenre} = bookSlice.actions;
+export const {addNewBook, setBook, editBook, delBook, searchBook, aSortingCatalog, dSortingCatalog, updateCatalog, filterGenre} = bookSlice.actions;
 export default bookSlice.reducer;
