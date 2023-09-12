@@ -27,9 +27,9 @@ export default function AddBook(){
     
     const addSave =()=>{
         if (TitleH1==="Adding a Book to the Library"){
-                const id = new Date();
+                const date = new Date();
                 const newBook:IBook = {
-                    "id": id.getTime(),
+                    "id": date.getTime(),
                     "title": title,
                     "author":author,
                     "genre":genre,

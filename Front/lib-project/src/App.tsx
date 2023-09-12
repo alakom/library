@@ -22,7 +22,7 @@ function App() {
   const modalSearch = useSelector((state:RootState)=>state.search.visibleWindowSearch);
   const dispatch =useDispatch();
 
-  const catalog = useSelector((state: RootState)=>state.book.booksClone);
+  const catalog = useSelector((state: RootState)=>state.book.booksCatalog);
 
   useEffect(()=>{
     dispatch(bookReducers.setBook({books}));
@@ -53,11 +53,11 @@ function App() {
     </Modal>
     }
 
-    {modalSearch &&
+    {/* {modalSearch &&
     <Modal>
       <SearchBookModal />
     </Modal>
-    }
+    } */}
 
     {modalBookDetails && 
     <Modal>

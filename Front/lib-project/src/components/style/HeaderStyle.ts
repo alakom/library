@@ -6,9 +6,20 @@ import iconSignIn_ from '../data/icons/SignInA.png';
 import iconSearch from '../data/icons/Search.png';
 import iconSearch_ from '../data/icons/SearchA.png';
 
+export const SearchInput = styled.input`
+width: auto;
+border-radius: 3px;
+border: 1.5px solid #5973BD;
+background: #FFF;
+font-family: Roboto;
+font-style: normal;
+padding:2px;
+margin: 10px 10px 10px 15px;
+`;
+
 export const Nav = styled.nav`
 display: grid;
-grid-template-columns: 50px 10fr 100px;
+grid-template-columns: 200px 10fr 100px;
 grid-gap: 45px;
  align-items: center;
  justify-content: center;
@@ -32,8 +43,7 @@ align-items: center;
 export const DLeft = styled.div`
 display: grid;
 align-items: center;
-justify-content: center;
-margin-left;
+justify-content: flex-start;
 background: #F8F8FA;
 `;
 export const DLogo = styled.div`
@@ -100,7 +110,7 @@ flex-shrink: 0;
 background: url(${iconSearch});
 background-size: cover;
 border: 0;
-margin: 10px;
+margin: 10px 10px 10px 20px;
 &:hover {
     background: url(${iconSearch_});
     background-size: cover;

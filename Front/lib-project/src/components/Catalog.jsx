@@ -17,6 +17,7 @@ export default function Catalog({catalog}){
   const [sortBook,setSort]=useState([false,false]);
   const dispatch = useDispatch();
 
+  console.log(catalog);
   useEffect(()=>{
     dispatch(bookReducers.filterGenre({active}));
   },[active]);

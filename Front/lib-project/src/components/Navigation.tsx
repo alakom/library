@@ -6,19 +6,38 @@ import { RootState } from '../store';
 import { useSelector, useDispatch } from 'react-redux';
 import { openWindowSignIn } from "../store/userSlice";
 import { openWindow } from '../store/searchSlice';
+import { useEffect, useState } from 'react';
+import { searchBook, updateCatalog } from '../store/bookSlice';
 
 
 
 export default function Navigation(){
   const userAuthorization = useSelector((state: RootState) => state.user.authorization);
+  const isSearch=useSelector((state:RootState)=>state.search.visibleWindowSearch);
   const dispatch = useDispatch();
+  const [searchString, setSearchString]=useState('');
+  useEffect(()=>{
+    dispatch(searchBook({searchString}));
+  },[searchString]);
+  
+  useEffect(()=>{
+    dispatch(updateCatalog());
+  },[isSearch]);
     return (
         <style.Nav>
-            <style.DLeft>
+            <style.DLeft
+              style={{gridTemplateColumns: '35px 200px'}}
+              >
                 <Tooltip title="Search books">
                     <style.ButtonSearch 
                     onClick={()=>dispatch(openWindow())}/>
-                </Tooltip>  
+                </Tooltip>
+                {isSearch &&
+                <style.SearchInput
+                  placeholder='Введите запрос'
+                  onChange={(e)=>setSearchString(e.target.value)}
+                />
+                }  
               </style.DLeft>
 
               <style.DLogo>  
@@ -37,7 +56,8 @@ export default function Navigation(){
                 <Tooltip title="Sign in">
                     <style.ButtonSignIn
                     onClick={()=>dispatch(openWindowSignIn())}/>
-                </Tooltip></style.DRight>
+                </Tooltip>
+              </style.DRight>
         </style.Nav>
     );
 }
