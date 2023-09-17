@@ -17,10 +17,13 @@ export default function Catalog({catalog}){
   const [sortBook,setSort]=useState([false,false]);
   const dispatch = useDispatch();
 
-  console.log(catalog);
   useEffect(()=>{
     dispatch(bookReducers.filterGenre({active}));
   },[active]);
+
+  useEffect(()=>{
+    dispatch(bookReducers.saveParametrs({activeFilter: active, aSort: sortBook[0], dSort: sortBook[1]}));
+  },[active,sortBook]);
 
   const openAddBookWindow = useCallback(()=>
   {

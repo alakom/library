@@ -5,7 +5,7 @@ import { RootState } from '../store';
 import { addWindowBook,viewEditBooks } from '../store/editBookWindowSlice';
 import { useCallback, useState } from 'react';
 import { IBook } from './data/models';
-import { addNewBook, editBook, delBook } from '../store/bookSlice';
+import { addNewBook, editBook, delBook, updateCatalog, filterGenre, aSortingCatalog, dSortingCatalog } from '../store/bookSlice';
 
 
 export default function AddBook(){
@@ -13,6 +13,9 @@ export default function AddBook(){
     const TitleH1= useSelector((state:RootState)=> state.editWindow.title);
     const ButtonAddSave = useSelector((state:RootState)=>state.editWindow.editAdd);
     const ButtonCancelDelete = useSelector((state:RootState)=>state.editWindow.cancelDelete);
+    const active = useSelector((state:RootState)=>state.book.saveParametrs.activeFilter);
+  const aSort =useSelector((state:RootState)=>state.book.saveParametrs.aSort);
+  const dSort =useSelector((state:RootState)=>state.book.saveParametrs.dSort);
     const book = useSelector((state:RootState)=>state.editWindow.book);
     const [title,setTitle]=useState(book.title);
     const [author,setAuthor]=useState(book.author);
@@ -29,7 +32,7 @@ export default function AddBook(){
         if (TitleH1==="Adding a Book to the Library"){
                 const date = new Date();
                 const newBook:IBook = {
-                    "id": date.getTime(),
+                    "id": 213,
                     "title": title,
                     "author":author,
                     "genre":genre,
@@ -43,8 +46,10 @@ export default function AddBook(){
                 };
             dispatch(addNewBook({newBook}));
             closeWindow();
+            
         }
         else{
+            
             const upDateBook:IBook = {
                 "id": book.id,
                 "title": title,
@@ -58,7 +63,15 @@ export default function AddBook(){
                         "count":10,
                     }
             };
+            dispatch(updateCatalog());
             dispatch(editBook({upDateBook}));
+            dispatch(filterGenre({active}));
+            if (aSort){
+                dispatch(aSortingCatalog());
+            }
+            if (dSort){
+                dispatch(dSortingCatalog());
+            }
             closeWindow();
         }
     };

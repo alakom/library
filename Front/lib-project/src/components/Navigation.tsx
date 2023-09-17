@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { openWindowSignIn } from "../store/userSlice";
 import { openWindow } from '../store/searchSlice';
 import { useEffect, useState } from 'react';
-import { searchBook, updateCatalog } from '../store/bookSlice';
+import { searchBook, updateCatalog, filterGenre, aSortingCatalog, dSortingCatalog } from '../store/bookSlice';
 
 
 
@@ -16,12 +16,30 @@ export default function Navigation(){
   const isSearch=useSelector((state:RootState)=>state.search.visibleWindowSearch);
   const dispatch = useDispatch();
   const [searchString, setSearchString]=useState('');
+  const active = useSelector((state:RootState)=>state.book.saveParametrs.activeFilter);
+  const aSort =useSelector((state:RootState)=>state.book.saveParametrs.aSort);
+  const dSort =useSelector((state:RootState)=>state.book.saveParametrs.dSort);
   useEffect(()=>{
     dispatch(searchBook({searchString}));
+    dispatch(filterGenre({active}));
+    if (aSort){
+      dispatch(aSortingCatalog());
+    }
+    if (dSort){
+      dispatch(dSortingCatalog());
+    }
   },[searchString]);
   
   useEffect(()=>{
     dispatch(updateCatalog());
+    
+    dispatch(filterGenre({active}));
+    if (aSort){
+      dispatch(aSortingCatalog());
+    }
+    if (dSort){
+      dispatch(dSortingCatalog());
+    }
   },[isSearch]);
     return (
         <style.Nav>
